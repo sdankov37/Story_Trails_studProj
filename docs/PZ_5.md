@@ -80,39 +80,7 @@
 
 **Название диаграммы:** Диаграмма контейнеров системы «Местные истории»
 
-```mermaid
-C4Container
-    title Диаграмма контейнеров: «Местные истории»
-
-    Person(guide, "Гид", "Создает туры и управляет ими")
-    Person(tourist, "Турист", "Ищет и бронирует туры")
-    Person(moderator, "Модератор", "Проверяет туры")
-
-    System_Boundary(c1, "Местные истории") {
-        Container(web_app, "Веб-приложение", "React", "Интерфейс для всех ролей. Каталог, карта, кабинеты.")
-        Container(api_server, "API Сервер", "Node.js, NestJS", "Бизнес-логика, бронирование, интеграции.")
-        ContainerDb(db, "Центральная БД", "PostgreSQL", "Пользователи, туры, брони, отзывы.")
-        ContainerDb(file_storage, "Хранилище файлов", "S3-совместимое", "Фото, аудио для Story Trails.")
-    }
-
-    System_Ext(payment, "Платежный сервис", "Принимает платежи (тест)")
-    System_Ext(notifier, "Сервис уведомлений", "Отправка на сайт и email")
-
-    Rel(guide, web_app, "Создаёт туры, Story Trail", "—")
-    Rel(tourist, web_app, "Бронирует, оплачивает", "—")
-    Rel(moderator, web_app, "Проверяет туры", "—")
-
-    Rel(web_app, api_server, "Отправляет запросы", "JSON/HTTPS")
-    Rel(api_server, db, "Читает/пишет данные", "SQL")
-    Rel(api_server, file_storage, "Загружает/получает медиа", "S3 API")
-
-    Rel(api_server, payment, "Отправляет запрос на оплату", "HTTPS/REST")
-    Rel(payment, api_server, "Возвращает статус", "HTTPS/REST")
-
-    Rel(api_server, notifier, "Отправляет уведомления", "HTTPS/REST")
-
-    UpdateLayoutConfig($c4ShapeInRow="3", $c4BoundaryInRow="1")
-```
+![Диаграмма](PZ_5.drawio.png)
 
 ### Легенда
 
